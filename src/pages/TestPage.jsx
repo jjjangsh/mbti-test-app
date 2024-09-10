@@ -3,11 +3,20 @@ import calculateMBTI from "../utils/mbtiCalculator";
 import { createTestResult } from "../api/testResults";
 import TestForm from "../components/TestForm";
 import userStore from "../zustand/userStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const TestPage = () => {
-  const navigate = useNavigate();
-
   const { user } = userStore();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: createTestResult,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["testResults"]);
+      navigate("/results");
+    },
+  });
 
   const handleTestSubmit = async (answers) => {
     const result = calculateMBTI(answers);
@@ -19,12 +28,11 @@ const TestPage = () => {
       date: new Date().toISOString(),
       visibility: true,
     };
-    await createTestResult(resultData);
-    navigate("/results");
+
+    mutation.mutate(resultData);
   };
   return (
     <div>
-      <h1>MBTI 테스트</h1>
       <TestForm handleTestSubmit={handleTestSubmit} />
     </div>
   );

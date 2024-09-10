@@ -1,6 +1,6 @@
 import TestResultItem from "./TestResultItem";
 
-const TestResultList = ({ results, user, handleUpdate, handleDelete }) => {
+const TestResultList = ({ results, user }) => {
   return (
     <div className="flex justify-center mt-30">
       <div className="flex flex-col w-1/2">
@@ -10,13 +10,7 @@ const TestResultList = ({ results, user, handleUpdate, handleDelete }) => {
           })
           .map((result) => {
             return (
-              <TestResultItem
-                key={result.id}
-                result={result}
-                user={user}
-                handleUpdate={handleUpdate}
-                handleDelete={handleDelete}
-              />
+              <TestResultItem key={result.id} result={result} user={user} />
             );
           })}
       </div>

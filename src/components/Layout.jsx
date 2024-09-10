@@ -4,7 +4,6 @@ import userStore from "../zustand/userStore";
 const Layout = ({ children }) => {
   const navigate = useNavigate();
   const { user, logout } = userStore();
-  console.log("레이아웃에서 user 정보가 있는지?", user);
 
   const handleLogout = () => {
     logout();

@@ -1,39 +1,32 @@
-import { useEffect, useState } from "react";
 import { getTestResults } from "../api/testResults";
 import TestResultList from "../components/TestResultList";
 import userStore from "../zustand/userStore";
+import { useQuery } from "@tanstack/react-query";
 
 const TestResultPage = () => {
-  const [results, setResults] = useState([]);
-
   const { user } = userStore();
 
-  const fetchResults = async () => {
-    const data = await getTestResults();
-    setResults(data);
-  };
+  const {
+    data: results,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["testResults"],
+    queryFn: getTestResults,
+  });
 
-  useEffect(() => {
-    fetchResults();
-  }, []);
+  if (isLoading) {
+    return <div>로딩중입니다...</div>;
+  }
 
-  const handleUpdate = async () => {
-    fetchResults();
-  };
-
-  const handleDelete = async () => {
-    fetchResults();
-  };
+  if (isError) {
+    return <div>오류가 발생했습니다...</div>;
+  }
 
   return (
     <div>
       <div>
-        <TestResultList
-          results={results}
-          user={user}
-          handleUpdate={handleUpdate}
-          handleDelete={handleDelete}
-        />
+        <TestResultList results={results} user={user} />
       </div>
     </div>
   );

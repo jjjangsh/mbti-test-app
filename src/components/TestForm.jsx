@@ -19,7 +19,7 @@ const TestForm = ({ handleTestSubmit }) => {
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 p-6 bg-white rounded-lg shadow-sm border border-gray-200 w-full max-w-md"
+        className="mt-12 space-y-6 p-6 bg-slate-300 rounded-lg shadow-sm border border-gray-200 w-full max-w-md"
       >
         {questions.map((q, index) => (
           <div key={q.id} className="mb-4">
