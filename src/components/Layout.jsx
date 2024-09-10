@@ -12,13 +12,14 @@ const Layout = ({ children, user, setUser }) => {
 
   const handleLogout = () => {
     setUser(null);
+    localStorage.removeItem("user");
     navigate("/");
   };
 
   return (
     <div>
       <header className="bg-white shadow-md">
-        <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <nav className="container mx-auto px-12 py-4 flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold text-gray-800">
             홈
           </Link>

@@ -10,7 +10,9 @@ import TestPage from "../pages/TestPage";
 import TestResultPage from "../pages/TestResultPage";
 
 const Router = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
 
   return (
     <BrowserRouter>

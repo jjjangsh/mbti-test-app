@@ -10,6 +10,7 @@ const Login = ({ setUser }) => {
       setUser(response);
       if (response.success) {
         alert("로그인 성공!");
+        localStorage.setItem("user", JSON.stringify(response));
         navigate("/");
       }
     } catch (error) {
