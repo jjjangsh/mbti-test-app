@@ -32,7 +32,7 @@ const TestResultItem = ({ result, user, handleUpdate, handleDelete }) => {
 
   const handleToggleVisibility = async () => {
     try {
-      const newVisibility = !result.visibility; //반대로 만듬
+      const newVisibility = !result.visibility;
       await updateTestResultVisibility(result.id, newVisibility);
       handleUpdate();
     } catch (error) {

@@ -5,7 +5,12 @@ const userStore = create((set) => ({
     setUser: (newUser) => {
         localStorage.setItem("user", JSON.stringify(newUser))
         set({ user: newUser })
-    }
+    },
+
+    logout: () => {
+        localStorage.removeItem("user");
+        set({ user: null });
+    },
 }));
 
 export default userStore;
