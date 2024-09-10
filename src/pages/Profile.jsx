@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { updateProfile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
+import userStore from "../zustand/userStore";
 
-const Profile = ({ user, setUser }) => {
+const Profile = () => {
   const navigate = useNavigate();
+  const { user, setUser } = userStore();
   const [nickname, setNickname] = useState(user?.nickname || "");
 
   const handleNicknameChange = (e) => {

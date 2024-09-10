@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { deleteTestResult, getTestResults } from "../api/testResults";
+import { useEffect, useState } from "react";
+import { getTestResults } from "../api/testResults";
 import TestResultList from "../components/TestResultList";
+import userStore from "../zustand/userStore";
 
-const TestResultPage = ({ user }) => {
+const TestResultPage = () => {
   const [results, setResults] = useState([]);
+
+  const { user } = userStore();
 
   const fetchResults = async () => {
     const data = await getTestResults();
@@ -15,12 +18,10 @@ const TestResultPage = ({ user }) => {
   }, []);
 
   const handleUpdate = async () => {
-    // await updateTestResultVisibility(id, visibility);
     fetchResults();
   };
 
   const handleDelete = async () => {
-    // await deleteTestResult(id);
     fetchResults();
   };
 

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -10,39 +9,35 @@ import TestPage from "../pages/TestPage";
 import TestResultPage from "../pages/TestResultPage";
 
 const Router = () => {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
-
   return (
     <BrowserRouter>
-      <Layout user={user} setUser={setUser}>
+      <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 
           <Route
             path="/profile"
             element={
-              <ProtectedRoute user={user}>
-                <Profile user={user} setUser={setUser} />
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />
           <Route
             path="/test"
             element={
-              <ProtectedRoute user={user}>
-                <TestPage user={user} />
+              <ProtectedRoute>
+                <TestPage />
               </ProtectedRoute>
             }
           />
           <Route
             path="/results"
             element={
-              <ProtectedRoute user={user}>
-                <TestResultPage user={user} />
+              <ProtectedRoute>
+                <TestResultPage />
               </ProtectedRoute>
             }
           />

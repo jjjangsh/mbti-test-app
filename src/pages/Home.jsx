@@ -25,7 +25,7 @@ const Home = () => {
         </span>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6 mb-4 w-full max-w-md">
+      <div className="bg-white rounded-lg shadow-md p-6 mb-8 w-full max-w-md">
         <p className="text-xl font-semibold text-gray-700">팀 평가</p>
         <span className="text-gray-500">
           팀 내에서 자신과 동료들의 성격을 이해하고 협력할 수 있는 방법을
@@ -36,7 +36,7 @@ const Home = () => {
       <div>
         <Link
           to="/login"
-          className="bg-red-500 text-white px-4 mt-4 py-2 rounded hover:bg-red-600 transition"
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
         >
           로그인하고 테스트 시작하기
         </Link>

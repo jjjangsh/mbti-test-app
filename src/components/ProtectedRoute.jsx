@@ -1,8 +1,8 @@
-import React from "react";
 import { Navigate } from "react-router-dom";
+import userStore from "../zustand/userStore";
 
-const ProtectedRoute = ({ user, children }) => {
-  if (!user) {
+const ProtectedRoute = ({ children }) => {
+  if (!userStore.getState().user) {
     return <Navigate to="/login" />;
   }
 

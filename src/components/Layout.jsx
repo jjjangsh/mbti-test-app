@@ -1,15 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import userStore from "../zustand/userStore";
 
-const Layout = ({ children, user, setUser }) => {
+const Layout = ({ children }) => {
   const navigate = useNavigate();
+  const { user, setUser } = userStore();
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user]);
-
+  //TODO 스토어에 추가해야함
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("user");

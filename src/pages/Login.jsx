@@ -1,16 +1,17 @@
 import AuthForm from "../components/AuthForm";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
+import userStore from "../zustand/userStore";
 
-const Login = ({ setUser }) => {
+const Login = () => {
   const navigate = useNavigate();
+  const { setUser } = userStore();
   const handleLogin = async (formData) => {
     try {
       const response = await login(formData);
-      setUser(response);
       if (response.success) {
         alert("로그인 성공!");
-        localStorage.setItem("user", JSON.stringify(response));
+        setUser(response);
         navigate("/");
       }
     } catch (error) {
