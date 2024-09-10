@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const testInstance = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "https://rust-chalk-rowboat.glitch.me",
 });
 
 export default testInstance;
