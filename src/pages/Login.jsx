@@ -11,6 +11,7 @@ const Login = () => {
       const response = await login(formData);
       if (response.success) {
         alert("로그인 성공!");
+        console.log(response);
         setUser(response);
         navigate("/");
       }
