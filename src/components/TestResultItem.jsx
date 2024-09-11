@@ -32,26 +32,6 @@ const TestResultItem = ({ result, user }) => {
   const description =
     mbtiDescriptions[result.result] || "MBTI 유형 설명을 찾을 수 없습니다";
 
-  // const handleToggleVisibility = async () => {
-  //   try {
-  //     await updateTestResultVisibility(result.id, newVisibility);
-  //     handleUpdate();
-  //   } catch (error) {
-  //     console.log("공개여부 수정이 실패하였습니다.", error);
-  //     alert("공개여부 수정이 실패하였습니다.");
-  //   }
-  // };
-
-  // const deleteHandler = async () => {
-  //   try {
-  //     await deleteTestResult(result.id);
-  //     handleDelete();
-  //   } catch (error) {
-  //     console.log("테스트 결과 삭제를 실패하였습니다.", error);
-  //     alert("테스트 결과 삭제를 실패하였습니다.");
-  //   }
-  // };
-
   const toggleVisibilityMutation = useMutation({
     mutationFn: () => updateTestResultVisibility(result.id, newVisibility),
     onSuccess: () => {
