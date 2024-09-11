@@ -226,11 +226,9 @@ export default userStore;
 </br>
 <img src="https://github.com/user-attachments/assets/ffc11eb9-70b6-44d1-9679-1a59b7a83a61" width="500" height="300"/>
 
-## 개발 환경
+## 기술 스택
 
-|                                                     사용언어                                                     |                                                                                                                                            프레임워크 및 라이브러리                                                                                                                                            |
-| :--------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white" /> | <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/> |
+[![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1726057624731?alt=media&token=64af2dde-d2cf-4859-aa06-a9fa5cf7f631)](https://github.com/msdio/stackticon)
 
 ## 소감
 
