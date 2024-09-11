@@ -228,7 +228,7 @@ export default userStore;
 
 ## 기술 스택
 
-[![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1726057624731?alt=media&token=64af2dde-d2cf-4859-aa06-a9fa5cf7f631)]
+![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1726057624731?alt=media&token=64af2dde-d2cf-4859-aa06-a9fa5cf7f631)
 
 ## 소감
 
