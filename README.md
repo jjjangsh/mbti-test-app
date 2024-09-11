@@ -98,7 +98,7 @@ mbti-test-app
 
 ## 트러블 슈팅
 
-1. 🤢 회원 정보 수정 실패
+1. 🤢 회원 정보 수정 실패</br>
    <img src="https://github.com/user-attachments/assets/d90531af-f5cb-49b2-a049-84b58c26d3dd" width="500" height="300"/>
 
 </br>
@@ -147,6 +147,10 @@ export const updateProfile = async (nickname, accessToken) => {
 <img src="https://github.com/user-attachments/assets/092378b2-0036-4011-b986-4c423dd9288f" width="500" height="300"/>
 
 </br>
+
+</br>
+
+***
 
 2. 🤢 로그인 했지만 user 정보가 null 상태
 
