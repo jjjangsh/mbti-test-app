@@ -64,7 +64,7 @@ const Layout = ({ children }) => {
           </div>
         </nav>
       </header>
-      <main className="container main">{children}</main>
+      <main className="w-full main">{children}</main>
     </div>
   );
 };
