@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import userStore from "../zustand/userStore";
 
 const Home = () => {
+  const { user } = userStore();
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 p-4">
       <div className="text-center mb-8">
@@ -34,12 +37,21 @@ const Home = () => {
       </div>
 
       <div>
-        <Link
-          to="/login"
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-        >
-          로그인하고 테스트 시작하기
-        </Link>
+        {user ? (
+          <Link
+            to="/test"
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+          >
+            테스트하러 가기
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+          >
+            로그인하러 가기
+          </Link>
+        )}
       </div>
     </div>
   );
