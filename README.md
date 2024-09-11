@@ -57,7 +57,7 @@ mbti-test-app
 
 ```
 
-## 구현 기능
+## 구현 화면
 
 <details>
   <summary>메인</summary>
@@ -96,6 +96,195 @@ mbti-test-app
 
 </details>
 
+</br>
+
+## 구현 기능
+
+</br>
+
+**로그인, 회원가입, 정보수정** 
+
+</br>
+
+- axios를 사용해 서버와 통신으로 로그인, 회원가입, 정보수정
+```
+import authInstance from "../axiosInstances/authInstance";
+
+
+// 회원가입 요청
+export const register = async (formData) => {
+  const { data } = await authInstance.post("/register", formData);
+  return data;
+};
+
+// 로그인 요청
+export const login = async (formData) => {
+  const { data } = await authInstance.post("/login", formData);
+  return data;
+};
+
+// 정보 수정 요청
+export const updateProfile = async (nickname, accessToken) => {
+  const { data } = await authInstance.patch(
+    "/profile",
+    { nickname },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  return data;
+};
+```
+
+</br>
+
+- 로그인 시 localstorage에 user 저장 및 zustand로 userStore 생성 후 user 상태를 전역으로 관리
+
+```
+import { create } from "zustand";
+
+const userStore = create((set) => ({
+    user: JSON.parse(localStorage.getItem("user")) || null,
+    setUser: (newUser) => {
+        localStorage.setItem("user", JSON.stringify(newUser))
+        set({ user: newUser })
+    },
+
+    logout: () => {
+        localStorage.removeItem("user");
+        set({ user: null });
+    },
+}));
+
+export default userStore;
+```
+
+</br>
+
+- 로그인 한 사용자와 로그인하지 않은 사용자에게 보이는 navBar 조건부 UI 설정
+
+</br>
+
+**로그인 한 사용자와 하지 않은 사용자의 페이지 접근 차별성**
+
+</br>
+
+- ProtectedRoute 설정
+```
+const ProtectedRoute = ({ children }) => {
+  if (!userStore.getState().user) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
+```
+
+</br>
+
+**mbti 테스트**
+
+</br>
+
+- 테스트 페이지에서 문항을 제공하고 선택 후 제출 시 결과 페이지로 redirection
+
+</br>
+
+**mbti 테스트 결과 CRUD**
+
+</br>
+
+- 테스트 결과를 불러오고, 새로운 사용자가 참여 시 결과를 추가, 본인의 결과를 삭제 및 공개 여부를 수정
+```
+import testInstance from "../axiosInstances/testInstance";
+
+// 모든 결과 조회 요청
+export const getTestResults = async () => {
+  const { data } = await testInstance.get("/testResults");
+  return data;
+};
+
+// 결과 추가 요청
+export const createTestResult = async (resultData) => {
+  await testInstance.post("/testResults", resultData);
+};
+
+// 결과 삭제 요청
+export const deleteTestResult = async (id) => {
+  await testInstance.delete(`/testResults/${id}`);
+};
+
+// 결과 공개 여부 수정 요청
+export const updateTestResultVisibility = async (id, visibility) => {
+  await testInstance.patch(`/testResults/${id}`, { visibility });
+};
+```
+
+</br>
+
+- 위 요청을 사용하는 페이지에서 tanStack Query로 서버 상태 관리와 비동기 데이터 페칭을 효율적으로 처리
+```
+// TestResultPage.jsx
+
+const {
+    data: results,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["testResults"],
+    queryFn: getTestResults,
+  });
+
+  if (isLoading) {
+    return <div>로딩중입니다...</div>;
+  }
+
+  if (isError) {
+    return <div>오류가 발생했습니다...</div>;
+  }
+```
+```
+// TestPage.jsx
+
+ const mutation = useMutation({
+    mutationFn: createTestResult,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["testResults"]);
+      navigate("/results");
+    },
+  });
+```
+```
+// TestResultItem.jsx
+
+const toggleVisibilityMutation = useMutation({
+    mutationFn: () => updateTestResultVisibility(result.id, newVisibility),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["testResults"]);
+    },
+    onError: (error) => {
+      console.error("공개여부 수정이 실패하였습니다.", error);
+      alert("공개여부 수정이 실패하였습니다.");
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: () => deleteTestResult(result.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["testResults"]);
+    },
+    onError: (error) => {
+      console.error("테스트 결과 삭제를 실패하였습니다.", error);
+      alert("테스트 결과 삭제를 실패하였습니다.");
+    },
+  });
+```
+
+</br>
+
 ## 트러블 슈팅
 
 1. 🤢 회원 정보 수정 실패</br>
@@ -107,17 +296,9 @@ mbti-test-app
 
 </br>
 
-```
-export const updateProfile = async (nickname, accessToken) => {
-  const {data} = await authInstance.patch("/profile", nickname, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: Bearer ${accessToken},
-    },
-  })
-  return data;
-}
-```
+
+
+
 
 </br>
 
